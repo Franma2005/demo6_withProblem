@@ -5,21 +5,27 @@ import Slider from '../components/Slider';
 
 export default function HomeScreen() {
 
-    const { nowPlaying, setNowPlaying, loading, reload, setReload } = useMovies();
+    const { nowPlaying, setNowPlaying, loading, nowPlayingArray, setNowPlayingArray } = useMovies();
 
     return (
         <View>
             <Text>HomeScreen</Text>
-            <Slider movies={nowPlaying?.movies} height={100} />
+
+            <Slider moviesAndPage={nowPlayingArray} height={100} />
+
             <Button onPress={() => {
                 if (nowPlaying != null) {
+                    const updatedArray = [...nowPlayingArray, nowPlaying];
+                    setNowPlayingArray(updatedArray);
+                    nowPlayingArray.forEach((item) => {
+                        console.log(`ITEM SUPREMO ${JSON.stringify(item)}`)
+                    })
                     // Crear un nuevo objeto clonando el estado actual
                     const updatedNowPlaying = {
                         ...nowPlaying,
                         page: nowPlaying.page + 1, // Incrementar la página
                     };
                     setNowPlaying(updatedNowPlaying);
-                    setReload(reload + 1);
                 }
             }} title='PRESS BUTTON TO SEE THE NEXT PAGE' />
         </View>

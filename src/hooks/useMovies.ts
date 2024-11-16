@@ -8,7 +8,7 @@ export const useMovies = () => {
     //* El estado inicial de nowPlaying podra ser null (la primera vez que se ejecute el useMovie() lo será) y el resto de veces siempre que no halla
     //* ningun problema será nowPlaying
     const [nowPlaying, setNowPlaying] = useState(<ResultMovie | null>(null));
-    const [reload, setReload] = useState(<number>(1));
+    const [nowPlayingArray, setNowPlayingArray] = useState(<ResultMovie[]>([]));
     const [loading, setLoading] =useState(false);
     const loadMovies = async () => {
         //* Al enviar nowPlaying como null esto causaría problemas en el paramtero de llegada del método getMovies en FilmAdapter
@@ -20,9 +20,9 @@ export const useMovies = () => {
     }
     useEffect(() => {
       loadMovies();
-    }, [reload])
+    }, [nowPlayingArray])
     
     return {
-        nowPlaying, setNowPlaying, loading, reload, setReload,
+        nowPlaying, setNowPlaying, loading, nowPlayingArray, setNowPlayingArray
     }
 }
