@@ -8,6 +8,7 @@ export const useMovies = () => {
     //* El estado inicial de nowPlaying podra ser null (la primera vez que se ejecute el useMovie() lo será) y el resto de veces siempre que no halla
     //* ningun problema será nowPlaying
     const [nowPlaying, setNowPlaying] = useState(<ResultMovie | null>(null));
+    //* Creamos un nuevo estado. Que va a ser además el que va a hacer que se renderice el componente si cambia
     const [nowPlayingArray, setNowPlayingArray] = useState(<ResultMovie[]>([]));
     const [loading, setLoading] =useState(false);
     const loadMovies = async () => {
@@ -18,10 +19,13 @@ export const useMovies = () => {
             setLoading(true);
         }
     }
+
+    //* Se renderiza el componente si cambia
     useEffect(() => {
       loadMovies();
     }, [nowPlayingArray])
     
+    //* nowPlayingArray, setNowPlaying, setNowPlayingArray se devuelven
     return {
         nowPlaying, setNowPlaying, loading, nowPlayingArray, setNowPlayingArray
     }

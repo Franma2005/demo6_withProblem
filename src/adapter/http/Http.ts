@@ -20,5 +20,6 @@ export abstract class Http implements IFilms {
         this.key = key;
     }
 
+    //* Hay que modificar IFilms que es la interfaz que obliga a Http a implentar el método
     abstract getFilms(route: string, pageInfo: DataMovieRequest | null) : Promise<MoviesResponse | HttpError> ;
 }

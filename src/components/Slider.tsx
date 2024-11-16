@@ -14,6 +14,7 @@ export default function Slider({ moviesAndPage, height }: Movies) {
       <View>
         <ScrollView style={styles.contenedor} horizontal={true}>
         {
+          //* Hemos pasado de recibir un Movies[] a ResultMovies[] que contiene movies asi que optamos por esta solución tan malilla
           moviesAndPage.map((movies) => (
             movies.movies.map((item) => (
               <Image style={styles.imagen} key={item.id}

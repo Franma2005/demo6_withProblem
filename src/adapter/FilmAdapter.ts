@@ -20,9 +20,11 @@ export class FilmAdapter {
         nowPlaying: "/now_playing"
     }
 
+    //* En FilmAdapter no nos ocupamos del problema, llega como DataMovieRequest o como null y lo enviamos como null
     static async getMovies(route: string, data: DataMovieRequest | null): Promise<ResultMovie | null> {
         const http = HttpFactory2.build();
         if (!Reflect.has(FilmAdapter.ROUTES, route)) route = FilmAdapter.ROUTES.nowPlaying;
+        //* Lo enviamos aquí en el método getFilms (Ojo! para poder añadir data debemos modificar el metodo en la clase en la clase abstracta).
         const movies = await http.getFilms(route, data);
         if (movies instanceof HttpError) return null;
         const dataMovies = resultMovieMapper(movies);
